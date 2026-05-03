@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jarvis - Votre Assistant Intelligent</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">tomclair</span><span class="logo-dot">.tech</span>
+            </div>
+            <div class="nav-links">
+                <a href="#hero" class="nav-link active">Accueil</a>
+                <a href="#features" class="nav-link">Fonctionnalités</a>
+                <a href="#tech" class="nav-link">Technique</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#testimonials" class="nav-link">Témoignages</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-line">Jarvis</span>
+                <span class="title-line gradient-text">Votre Assistant Intelligent</span>
+            </h1>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-icon">✓</span>
+                    <span class="stat-text">SYSTÈME</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🤖</span>
+                    <span class="stat-text">IA TECHNOLOGIE</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">🕐</span>
+                    <span class="stat-text">24/7 SUPPORT</span>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="#features" class="btn btn-primary">
+                    <span>DÉCOUVRIR</span>
+                </a>
+                <a href="#contact" class="btn btn-secondary">NOUS CONTACTER</a>
+            </div>
+            <div class="hero-socials">
+                <a href="https://www.tiktok.com/@tom_visionai_pro" target="_blank" rel="noopener" class="social-link social-tiktok" aria-label="TikTok">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>@tom_visionai_pro</span>
+                </a>
+                <a href="https://www.instagram.com/tom_visionai_pro/" target="_blank" rel="noopener" class="social-link social-instagram" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>@tom_visionai_pro</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FONCTIONNALITÉS</span>
+                <h2 class="section-title">Ce Que Jarvis Peut Faire Pour Vous</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Assistant Vocal</h3>
+                    <p>Interaction naturelle par la voix.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Automatisation</h3>
+                    <p>Automatisez vos tâches répétitives.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multi-Plateforme</h3>
+                    <p>Accédez depuis n'importe quel appareil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2>Contactez-Nous</h2>
+            <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="42e1bd3d-5ef8-42c7-bb4b-cd7335bfbe16">
+                <input type="hidden" name="subject" value="Nouveau message depuis tomclair.tech">
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" required placeholder="Votre nom">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Votre message..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">ENVOYER</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">TÉMOIGNAGES</span>
+                <h2 class="section-title">Ce Que Disent Nos Utilisateurs</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Jarvis a complètement transformé ma façon de travailler. L'assistant vocal est incroyable !"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JD</div>
+                        <div class="author-info">
+                            <div class="author-name">Jean Dupont</div>
+                            <div class="author-title">Entrepreneur</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"L'automatisation des tâches me fait gagner un temps précieux chaque jour."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ML</div>
+                        <div class="author-info">
+                            <div class="author-name">Marie Leblanc</div>
+                            <div class="author-title">Développeuse</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Interface magnifique et technologie de pointe. Je recommande vivement !"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PL</div>
+                        <div class="author-info">
+                            <div class="author-name">Pierre Laurent</div>
+                            <div class="author-title">Designer UX</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2026 tomclair.tech - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
