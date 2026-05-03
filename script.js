@@ -1,9 +1,49 @@
 window.addEventListener('load', function() {
+    initLoadingScreen();
     initScrollProgress();
     initBackToTop();
     initMobileMenu();
     initContactForm();
 });
+
+function initLoadingScreen() {
+    var overlay = document.getElementById('loadingOverlay');
+    var closeBtn = document.getElementById('loadingCloseBtn');
+    var progressBar = document.getElementById('loadingProgressBar');
+    var timeText = document.getElementById('loadingTime');
+    
+    if (!overlay) return;
+    
+    var duration = 20000; // 20 secondes
+    var interval = 50; // Mise à jour toutes les 50ms
+    var elapsed = 0;
+    var timer = setInterval(function() {
+        elapsed += interval;
+        var progress = Math.min((elapsed / duration) * 100, 100);
+        progressBar.style.width = progress + '%';
+        
+        var remaining = Math.max(0, Math.ceil((duration - elapsed) / 1000));
+        timeText.textContent = 'Temps restant: ' + remaining + ' seconde' + (remaining > 1 ? 's' : '');
+        
+        if (elapsed >= duration) {
+            clearInterval(timer);
+            overlay.classList.add('hidden');
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 500);
+        }
+    }, interval);
+    
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            clearInterval(timer);
+            overlay.classList.add('hidden');
+            setTimeout(function() {
+                overlay.style.display = 'none';
+            }, 500);
+        });
+    }
+}
 
 function initScrollProgress() {
     var progressBar = document.getElementById('scrollProgress');
