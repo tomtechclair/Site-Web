@@ -4,43 +4,30 @@ window.addEventListener('load', function() {
     initBackToTop();
     initMobileMenu();
     initContactForm();
+    initFAQ();
+    initSmoothScroll();
 });
 
 function initLoadingScreen() {
     var overlay = document.getElementById('loadingOverlay');
     var closeBtn = document.getElementById('loadingCloseBtn');
-    var progressBar = document.getElementById('loadingProgressBar');
-    var timeText = document.getElementById('loadingTime');
     
     if (!overlay) return;
     
-    var duration = 20000; // 20 secondes
-    var interval = 50; // Mise à jour toutes les 50ms
-    var elapsed = 0;
-    var timer = setInterval(function() {
-        elapsed += interval;
-        var progress = Math.min((elapsed / duration) * 100, 100);
-        progressBar.style.width = progress + '%';
-        
-        var remaining = Math.max(0, Math.ceil((duration - elapsed) / 1000));
-        timeText.textContent = 'Temps restant: ' + remaining + ' seconde' + (remaining > 1 ? 's' : '');
-        
-        if (elapsed >= duration) {
-            clearInterval(timer);
-            overlay.classList.add('hidden');
-            setTimeout(function() {
-                overlay.style.display = 'none';
-            }, 500);
-        }
-    }, interval);
+    // Afficher l'overlay très brièvement puis le fermer automatiquement
+    setTimeout(function() {
+        overlay.classList.add('hidden');
+        setTimeout(function() {
+            overlay.style.display = 'none';
+        }, 300);
+    }, 1000); // 1 seconde au lieu de 20 secondes
     
     if (closeBtn) {
         closeBtn.addEventListener('click', function() {
-            clearInterval(timer);
             overlay.classList.add('hidden');
             setTimeout(function() {
                 overlay.style.display = 'none';
-            }, 500);
+            }, 300);
         });
     }
 }
@@ -83,43 +70,92 @@ function initContactForm() {
     
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        var button = form.querySelector('button');
-        var originalText = button.innerHTML;
-        
-        button.innerHTML = '<span>ENVOI EN COURS...</span>';
-        button.disabled = true;
-        
         var formData = new FormData(form);
+        var submitBtn = form.querySelector('button[type="submit"]');
+        var originalText = submitBtn.textContent;
+        
+        submitBtn.textContent = 'Envoi en cours...';
+        submitBtn.disabled = true;
         
         fetch(form.action, {
             method: 'POST',
             body: formData
         })
         .then(function(response) {
-            if (response.ok) {
-                button.innerHTML = "✓ MESSAGE ENVOYÉ !";
-                button.style.background = "#10b981";
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.success) {
+                submitBtn.textContent = 'Message envoyé !';
                 form.reset();
-                
                 setTimeout(function() {
-                    button.innerHTML = originalText;
-                    button.style.background = "";
-                    button.disabled = false;
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
                 }, 3000);
             } else {
-                throw new Error("Server error");
+                throw new Error('Erreur lors de l\'envoi');
             }
         })
         .catch(function(error) {
-            button.innerHTML = "ERREUR - RÉESSAYEZ";
-            button.style.background = "#ff5f56";
-            
+            submitBtn.textContent = 'Erreur - Réessayez';
+            submitBtn.disabled = false;
             setTimeout(function() {
-                button.innerHTML = originalText;
-                button.style.background = "";
-                button.disabled = false;
+                submitBtn.textContent = originalText;
             }, 3000);
+        });
+    });
+}
+
+function initFAQ() {
+    var faqItems = document.querySelectorAll('.faq-item');
+    if (!faqItems.length) return;
+    
+    faqItems.forEach(function(item) {
+        var question = item.querySelector('.faq-question');
+        var answer = item.querySelector('.faq-answer');
+        var icon = item.querySelector('.fa-chevron-down');
+        
+        question.addEventListener('click', function() {
+            var isOpen = answer.style.display === 'block';
+            
+            // Close all other items
+            faqItems.forEach(function(otherItem) {
+                if (otherItem !== item) {
+                    otherItem.querySelector('.faq-answer').style.display = 'none';
+                    otherItem.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            // Toggle current item
+            answer.style.display = isOpen ? 'none' : 'block';
+            icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+        });
+    });
+}
+
+function initSmoothScroll() {
+    var navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+    if (!navLinks.length) return;
+    
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            var targetId = this.getAttribute('href').substring(1);
+            var targetSection = document.getElementById(targetId);
+            
+            if (targetSection) {
+                var offsetTop = targetSection.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav link
+                navLinks.forEach(function(l) {
+                    l.classList.remove('active');
+                });
+                this.classList.add('active');
+            }
         });
     });
 }
